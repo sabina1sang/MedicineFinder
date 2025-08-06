@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Medicine</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-blue-50 font-sans min-h-screen flex flex-col">
+
+<header class="bg-blue-500 text-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center p-4">
+        <h1 class="text-xl font-bold">🏥 Pharmacy Dashboard</h1>
+        <nav>
+            <a href="{% url 'home' %}" class="px-3 hover:underline">Home</a>
+            <a href="#" class="px-3 hover:underline">Manage Medicines</a>
+            <a href="{% url 'logout' %}" class="px-3 hover:underline">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="flex-grow flex justify-center items-center">
+    <form method="post" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        {% csrf_token %}
+        <h1 class="text-3xl font-bold mb-6 text-blue-900">Add Medicine</h1>
+
+        {{ form.non_field_errors }}
+
+        <label class="block mb-2 font-semibold text-blue-800">Medicine Name</label>
+        {{ form.medicine_name }}
+
+        <label class="block mt-6 mb-2 font-semibold text-blue-800">Generic Name</label>
+        {{ form.generic_name }}
+
+        <label class="block mt-6 mb-2 font-semibold text-blue-800">Pharmacy</label>
+        {{ form.pharmacy }}
+
+        <label class="block mt-6 mb-2 font-semibold text-blue-800">Price</label>
+        {{ form.price }}
+
+        <label class="block mt-6 mb-2 font-semibold text-blue-800">Quantity</label>
+        {{ form.quantity }}
+
+        <label class="block mt-6 mb-2 font-semibold text-blue-800">Expiry Date</label>
+        {{ form.expiry_date }}
+
+        <button type="submit" class="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition">
+            Add Medicine
+        </button>
+    </form>
+</main>
+
+<footer class="bg-gray-900 text-white text-center py-4">
+    <p>&copy; 2025 Medicine Finder | All rights reserved.</p>
+</footer>
+
+</body>
+</html>

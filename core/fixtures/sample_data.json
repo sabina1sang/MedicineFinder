@@ -1,0 +1,124 @@
+[
+  {
+    "model": "core.user",
+    "pk": 1,
+    "fields": {
+      "username": "ram_sharma",
+      "password": "1234fr",
+      
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "email": "ram.sharma@example.com",
+      "first_name": "Ram",
+      "last_name": "Sharma"
+    }
+  },
+  {
+    "model": "core.user",
+    "pk": 2,
+    "fields": {
+      "username": "sita_kc",
+      "password": "4567we",
+      
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "email": "sita.kc@example.com",
+      "first_name": "Sita",
+      "last_name": "KC"
+    }
+  },
+  {
+    "model": "core.pharmacy",
+    "pk": 1,
+    "fields": {
+      "owner": 1,
+      "name": "Kathmandu Health Pharmacy",
+      "address": "Thamel, Kathmandu, Nepal",
+      "phone": "+977-1-4422334"
+    }
+  },
+  {
+    "model": "core.pharmacy",
+    "pk": 2,
+    "fields": {
+      "owner": 2,
+      "name": "Pokhara Care Pharmacy",
+      "address": "Lakeside, Pokhara, Nepal",
+      "phone": "+977-61-520045"
+    }
+  },
+  {
+    "model": "core.medicine",
+    "pk": 1,
+    "fields": {
+      "name": "Paracetamol",
+      "generic_name": "Acetaminophen"
+    }
+  },
+  {
+    "model": "core.medicine",
+    "pk": 2,
+    "fields": {
+      "name": "Amoxicillin",
+      "generic_name": "Amoxicillin Trihydrate"
+    }
+  },
+  {
+    "model": "core.medicine",
+    "pk": 3,
+    "fields": {
+      "name": "Cetirizine",
+      "generic_name": "Cetirizine Hydrochloride"
+    }
+  },
+  {
+    "model": "core.pharmacymedicine",
+    "pk": 1,
+    "fields": {
+      "pharmacy": 1,
+      "medicine": 1,
+      "price": "15.00",
+      "quantity": 120,
+      "expiry_date": "2026-12-31",
+      "updated_at": "2025-08-05T12:00:00Z"
+    }
+  },
+  {
+    "model": "core.pharmacymedicine",
+    "pk": 2,
+    "fields": {
+      "pharmacy": 1,
+      "medicine": 2,
+      "price": "50.00",
+      "quantity": 60,
+      "expiry_date": "2027-06-30",
+      "updated_at": "2025-08-05T12:00:00Z"
+    }
+  },
+  {
+    "model": "core.pharmacymedicine",
+    "pk": 3,
+    "fields": {
+      "pharmacy": 2,
+      "medicine": 1,
+      "price": "14.50",
+      "quantity": 80,
+      "expiry_date": "2026-11-30",
+      "updated_at": "2025-08-05T12:00:00Z"
+    }
+  },
+  {
+    "model": "core.pharmacymedicine",
+    "pk": 4,
+    "fields": {
+      "pharmacy": 2,
+      "medicine": 3,
+      "price": "25.00",
+      "quantity": 40,
+      "expiry_date": "2027-05-15",
+      "updated_at": "2025-08-05T12:00:00Z"
+    }
+  }
+]

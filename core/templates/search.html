@@ -1,0 +1,104 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Search - Medicine Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{% static 'bg.webp' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-blue-500 text-white shadow-md fixed top-0 left-0 w-full z-10">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <h1 class="text-xl font-bold">💊 Medicine Finder</h1>
+            <nav>
+                <a href="{% url 'home' %}" class="px-3 hover:underline">Home</a>
+                <a href="{% url 'user_dashboard' %}" class="px-3 hover:underline">Dashboard</a>
+                <a href="{% url 'logout' %}" class="px-3 hover:underline">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 pb-24 container mx-auto px-4">
+
+        <!-- Search Form -->
+        <div class="bg-white bg-opacity-40 backdrop-blur-sm p-6 rounded-lg shadow-lg max-w-2xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-4">🔍 Search Medicines</h2>
+            <form method="get" id="search-form" class="flex flex-col sm:flex-row gap-4">
+                <input type="text" name="query" placeholder="Enter medicine name..."
+                       value="{{ request.GET.query }}"
+                       class="flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                {{ form.sort_by|add_class:"px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+
+                <input type="hidden" name="lat" value="{{ request.GET.lat }}">
+                <input type="hidden" name="lng" value="{{ request.GET.lng }}">
+
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg shadow">
+                    Search
+                </button>
+            </form>
+        </div>
+
+        <!-- Search Results -->
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {% if results %}
+                {% for item in results %}
+                    <div class="bg-white bg-opacity-60 backdrop-blur-sm p-4 rounded-lg shadow-lg">
+                        <h3 class="text-lg font-bold text-blue-800">{{ item.medicine.name }}</h3>
+                        <p class="text-gray-700">{{ item.pharmacy.name }}</p>
+                        <p class="text-green-700 font-semibold">${{ item.price }}</p>
+                        {% if item.distance %}
+                            <span class="inline-block mt-2 bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full">
+                                📍 {{ item.distance|floatformat:2 }} km away
+                            </span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center text-white text-lg">No results found.</p>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-80 text-white text-center py-4 fixed bottom-0 left-0 w-full">
+        <p>&copy; 2025 Medicine Finder | All rights reserved.</p>
+    </footer>
+
+    <!-- JS for Location -->
+    <script>
+        function getLocationAndSearch() {
+            const sortSelect = document.querySelector('[name="sort_by"]');
+            if (sortSelect && sortSelect.value === 'distance') {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        document.querySelector('input[name="lat"]').value = position.coords.latitude;
+                        document.querySelector('input[name="lng"]').value = position.coords.longitude;
+                        document.getElementById('search-form').submit();
+                    }, function() {
+                        alert('Unable to get your location.');
+                    });
+                }
+            }
+        }
+        document.querySelector('[name="sort_by"]').addEventListener('change', function() {
+            if (this.value === 'distance') {
+                getLocationAndSearch();
+            }
+        });
+    </script>
+</body>
+</html>

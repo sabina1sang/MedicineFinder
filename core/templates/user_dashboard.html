@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Medicine Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background-image: url("{% static 'bg.webp' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-blue-500 text-white shadow-md fixed top-0 left-0 w-full z-10">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <h1 class="text-xl font-bold">💊 Medicine Finder</h1>
+            <nav>
+                <a href="{% url 'home' %}" class="px-3 hover:underline">Home</a>
+                <a href="{% url 'search' %}" class="px-3 hover:underline">Search Medicines</a>
+                <a href="{% url 'logout' %}" class="px-3 hover:underline">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center pt-20 pb-24">
+        <section class="bg-white bg-opacity-30 backdrop-blur-sm p-6 rounded-lg shadow-lg max-w-md text-center">
+            <h2 class="text-2xl font-bold mb-4">Welcome, {{ user.username }} 👋</h2>
+            <p class="text-gray-800">You can search for medicines in nearby pharmacies and view results instantly.</p>
+            <div class="mt-4">
+                <a href="{% url 'search' %}" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow">
+                    🔍 Start Searching
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-80 text-white text-center py-4 fixed bottom-0 left-0 w-full">
+        <p>&copy; 2025 Medicine Finder | All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
