@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body{
+        background-image:none ;
+        background-color: #a3b6f7ff;
+    }
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #869eedff; /* Tailwind blue-800 */
+        color: white;
+        padding: 1rem;
+        text-align: center;
+    }
+</style>
+
+<div class="min-h-screen bg-blue-50 py-12">
+    <div class="max-w-4xl mx-auto bg-blue rounded-xl shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-blue-600 mb-4">About MedFinder</h1>
+        <p class="text-gray-700 leading-relaxed mb-6">
+            <strong>MedFinder</strong> is your trusted platform to search, compare, and locate medicines across registered pharmacies near you.
+            Whether you’re looking for the best price, the nearest store, or alternative brands, MedFinder helps you make informed decisions quickly and conveniently.
+        </p>
+
+        <h2 class="text-2xl font-semibold text-blue-500 mb-3">Our Mission</h2>
+        <p class="text-gray-700 mb-6">
+            Our mission is to make healthcare more accessible by connecting patients directly to pharmacies and ensuring they find the medicines they need without unnecessary delays.
+        </p>
+
+        <h2 class="text-2xl font-semibold text-blue-500 mb-3">Features</h2>
+        <ul class="list-disc list-inside text-gray-700 mb-6">
+            <li>Search medicines by name or generic name</li>
+            <li>Compare prices across pharmacies</li>
+            <li>View pharmacy details, location, and availability</li>
+            <li>Easy-to-use dashboard for pharmacy owners</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold text-blue-500 mb-3">Why Choose Us?</h2>
+        <p class="text-gray-700 mb-6">
+            We combine technology and trust to make medicine finding seamless. 
+            With an ever-growing list of partner pharmacies, MedFinder ensures that you get the right medicine at the right time.
+        </p>
+
+    </div>
+</div>
+{% endblock %}

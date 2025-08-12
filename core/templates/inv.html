@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Inventory</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-blue-100 font-sans">
+
+<!-- Header -->
+<header class="bg-blue-500 text-white shadow-md">
+  <div class="container mx-auto flex justify-between items-center p-4">
+    <h1 class="text-xl font-bold">📦 Manage Inventory</h1>
+    <nav class="flex space-x-4">
+      <a href="{% url 'home' %}" class="hover:underline">Home</a>
+      <a href="{% url 'inv' %}" class="hover:underline">Manage Medicines</a>
+      <a href="{% url 'logout' %}" class="hover:underline">Logout</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Inventory Table -->
+<div class="container mx-auto mt-6 p-4 bg-white rounded shadow max-w-4xl">
+  <table class="min-w-full border border-gray-300 rounded-lg">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="py-4 px-4 border-b">Medicine Name</th>
+        <th class="py-4 px-4 border-b">Quantity</th>
+        <th class="py-4 px-4 border-b">Price</th>
+        <th class="py-4 px-4 border-b">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for med in medicines %}
+  <tr>
+    <td class="border-b py-2 px-10">{{ med.medicine.name }}</td>
+    <td class="border-b py-2 px-4">{{ med.quantity }}</td>
+    <td class="border-b py-2 px-4">${{ med.price }}</td>
+    <td class="border-b py-2 px-4">
+      <a href="{% url 'edit_medicine' med.id %}" class="text-blue-600 hover:underline mr-4">Edit</a>
+      <a href="{% url 'delete_medicine' med.id %}" class="text-red-600 hover:underline">Delete</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="4" class="text-center py-4">No medicines found.</td>
+  </tr>
+  {% endfor %}
+</tbody>
+
+  </table>
+
+  <div class="mt-4 text-center">
+    <a href="{% url 'pharmacy_dashboard' %}" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow inline-block">
+      ← Back to Dashboard
+    </a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-900 bg-opacity-80 text-white text-center py-4 fixed bottom-0 left-0 w-full">
+  <p>&copy; 2025 Medicine Finder | All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,43 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Pharmacy Map - Nepal</title>
+{% extends "base.html" %}
+{% block content %}
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<div class="container mt-4">
+    <h2>Pharmacy Map</h2>
+    <p>Showing all approved pharmacies with their locations.</p>
+    <div id="map" style="height: 500px;"></div>
+</div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    <style>
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-    <h2>Pharmacy Locations in Nepal</h2>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Default view — Nepal center
+    const map = L.map('map').setView([28.3949, 84.1240], 7);
 
-    <div id="map"></div>
+    // Add OSM layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-    <script>
-        // Create the map centered on Nepal
-        var map = L.map('map').setView([28.3949, 84.1240], 7);
+    // Fetch pharmacies from API
+    fetch("{% url 'pharmacy_list_api' %}")  // Django URL to your API
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(pharmacy => {
+                if (pharmacy.latitude && pharmacy.longitude) {
+                    const marker = L.marker([pharmacy.latitude, pharmacy.longitude]).addTo(map);
+                    marker.bindPopup(`
+                        <strong>${pharmacy.name}</strong><br>
+                        ${pharmacy.address || ''}<br>
+                        📞 ${pharmacy.phone || 'N/A'}
+                    `);
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching pharmacies:', error));
+});
+</script>
 
-        // Add OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Add sample pharmacy markers
-        L.marker([27.7172, 85.3240]).addTo(map)
-            .bindPopup('<b>ABC Pharmacy</b><br>Kathmandu, Nepal')
-            .openPopup();
-
-        L.marker([28.2096, 83.9856]).addTo(map)
-            .bindPopup('<b>XYZ Pharmacy</b><br>Pokhara, Nepal');
-    </script>
-</body>
-</html>
+{% endblock %}

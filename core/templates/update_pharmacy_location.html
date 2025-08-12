@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Update Pharmacy Location</h2>
+    <p>Drag the marker to your pharmacy's location or click on the map.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+            {{ form.latitude.label_tag }}
+            {{ form.latitude }}
+        </div>
+
+        <div class="form-group">
+            {{ form.longitude.label_tag }}
+            {{ form.longitude }}
+        </div>
+
+        <div id="map" style="height: 400px; margin-top: 10px;"></div>
+
+        <button type="submit" class="btn btn-primary mt-3">Save Location</button>
+    </form>
+</div>
+
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const latInput = document.getElementById('id_latitude');
+    const lngInput = document.getElementById('id_longitude');
+
+    // Default coordinates (center of Nepal or your target area)
+    const defaultLat = latInput.value ? parseFloat(latInput.value) : 28.3949;
+    const defaultLng = lngInput.value ? parseFloat(lngInput.value) : 84.1240;
+
+    // Initialize map
+    const map = L.map('map').setView([defaultLat, defaultLng], 7);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add draggable marker
+    const marker = L.marker([defaultLat, defaultLng], { draggable: true }).addTo(map);
+
+    // Update form inputs when marker moves
+    marker.on('dragend', function (e) {
+        const pos = marker.getLatLng();
+        latInput.value = pos.lat.toFixed(6);
+        lngInput.value = pos.lng.toFixed(6);
+    });
+
+    // Allow clicking on map to move marker
+    map.on('click', function (e) {
+        marker.setLatLng(e.latlng);
+        latInput.value = e.latlng.lat.toFixed(6);
+        lngInput.value = e.latlng.lng.toFixed(6);
+    });
+});
+</script>
+
+{% endblock %}

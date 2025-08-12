@@ -5,7 +5,6 @@
     "fields": {
       "username": "ram_sharma",
       "password": "1234fr",
-      
       "is_superuser": false,
       "is_staff": false,
       "is_active": true,
@@ -20,7 +19,6 @@
     "fields": {
       "username": "sita_kc",
       "password": "4567we",
-      
       "is_superuser": false,
       "is_staff": false,
       "is_active": true,
@@ -29,6 +27,35 @@
       "last_name": "KC"
     }
   },
+  {
+    "model": "core.user",
+    "pk": 3,
+    "fields": {
+      "username": "gita_rai",
+      "password": "7890ty",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "email": "gita.rai@example.com",
+      "first_name": "Gita",
+      "last_name": "Rai"
+    }
+  },
+  {
+    "model": "core.user",
+    "pk": 4,
+    "fields": {
+      "username": "hari_bhattarai",
+      "password": "3210yu",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "email": "hari.bhattarai@example.com",
+      "first_name": "Hari",
+      "last_name": "Bhattarai"
+    }
+  },
+
   {
     "model": "core.pharmacy",
     "pk": 1,
@@ -47,6 +74,26 @@
       "name": "Pokhara Care Pharmacy",
       "address": "Lakeside, Pokhara, Nepal",
       "phone": "+977-61-520045"
+    }
+  },
+  {
+    "model": "core.pharmacy",
+    "pk": 3,
+    "fields": {
+      "owner": 3,
+      "name": "Biratnagar City Pharmacy",
+      "address": "Main Road, Biratnagar, Nepal",
+      "phone": "+977-21-470222"
+    }
+  },
+  {
+    "model": "core.pharmacy",
+    "pk": 4,
+    "fields": {
+      "owner": 4,
+      "name": "Butwal Med Store",
+      "address": "Traffic Chowk, Butwal, Nepal",
+      "phone": "+977-71-543210"
     }
   },
   {
@@ -71,6 +118,30 @@
     "fields": {
       "name": "Cetirizine",
       "generic_name": "Cetirizine Hydrochloride"
+    }
+  },
+  {
+    "model": "core.medicine",
+    "pk": 4,
+    "fields": {
+      "name": "Ibuprofen",
+      "generic_name": "Ibuprofen"
+    }
+  },
+  {
+    "model": "core.medicine",
+    "pk": 5,
+    "fields": {
+      "name": "Azithromycin",
+      "generic_name": "Azithromycin Dihydrate"
+    }
+  },
+  {
+    "model": "core.medicine",
+    "pk": 6,
+    "fields": {
+      "name": "Metformin",
+      "generic_name": "Metformin Hydrochloride"
     }
   },
   {
@@ -120,5 +191,55 @@
       "expiry_date": "2027-05-15",
       "updated_at": "2025-08-05T12:00:00Z"
     }
+  },
+  {
+    "model": "core.pharmacymedicine",
+    "pk": 5,
+    "fields": {
+      "pharmacy": 3,
+      "medicine": 4,
+      "price": "20.00",
+      "quantity": 100,
+      "expiry_date": "2026-08-31",
+      "updated_at": "2025-08-06T10:30:00Z"
+    }
+  },
+  {
+    "model": "core.pharmacymedicine",
+    "pk": 6,
+    "fields": {
+      "pharmacy": 3,
+      "medicine": 5,
+      "price": "75.00",
+      "quantity": 50,
+      "expiry_date": "2027-01-20",
+      "updated_at": "2025-08-06T10:30:00Z"
+    }
+  },
+  {
+    "model": "core.pharmacymedicine",
+    "pk": 7,
+    "fields": {
+      "pharmacy": 4,
+      "medicine": 6,
+      "price": "60.00",
+      "quantity": 70,
+      "expiry_date": "2027-03-01",
+      "updated_at": "2025-08-06T10:30:00Z"
+    }
+  },
+  {
+    "model": "core.pharmacymedicine",
+    "pk": 8,
+    "fields": {
+      "pharmacy": 4,
+      "medicine": 2,
+      "price": "52.00",
+      "quantity": 30,
+      "expiry_date": "2026-10-10",
+      "updated_at": "2025-08-06T10:30:00Z"
+    }
   }
+
+
 ]

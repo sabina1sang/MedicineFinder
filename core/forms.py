@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
-from .models import User
-from .models import PharmacyMedicine, Medicine
+from .models import User, PharmacyMedicine, Medicine, Pharmacy
+
 
 class UserRegisterForm(UserCreationForm):
     ROLE_CHOICES = (
@@ -55,6 +55,7 @@ class PharmacyMedicineForm(forms.ModelForm):
 
     class Meta:
         model = PharmacyMedicine
+        exclude=['pharmacy']
         fields = ['medicine_name', 'generic_name', 'price', 'quantity', 'expiry_date']
         widgets = {
             
@@ -93,3 +94,26 @@ class PharmacyMedicineForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class MedicineForm(forms.ModelForm):
+    class Meta:
+        model = Medicine
+        fields = ['name', 'generic_name']  # add any other fields your Medicine model has
+        widgets = {
+            'name': forms.TextInput(attrs={
+                "class": "w-full p-3 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            }),
+            'generic_name': forms.TextInput(attrs={
+                "class": "w-full p-3 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            }),
+        }
+
+class PharmacyLocationForm(forms.ModelForm):
+    class Meta:
+        model = Pharmacy
+        fields = ['latitude', 'longitude']
+        widgets = {
+            'latitude': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'longitude': forms.TextInput(attrs={'readonly': 'readonly'}),
+        }

@@ -30,8 +30,8 @@
                 <h1 class="text-2xl font-bold">💊 Medicine Finder</h1>
                 <nav>
                     <a href="{% url 'home' %}" class="px-3 hover:text-gray-200">Home</a>
-                    <a href="#" class="px-3 hover:text-gray-200">About</a>
-                    <a href="#" class="px-3 hover:text-gray-200">Contact</a>
+                    <a href="{% url 'about' %}" class="px-3 hover:text-gray-200">About</a>
+                    <a href="{% url 'contact' %}" class="px-3 hover:text-gray-200">Contact</a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'logout' %}" class="px-3 hover:text-gray-200">Logout</a>
                     {% else %}
@@ -47,22 +47,18 @@
             <p class="max-w-xl mb-6 text-lg text-gray-200">
                 Search and locate medicines in nearby pharmacies in seconds. Save time, stay healthy!
             </p>
+
             {% if user.is_authenticated %}
-            {% if user.is_pharmacy %}
-                <a href="{% url 'pharmacy_dashboard' %}" class="bg-blue-300 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300">
-                    Go to Pharmacy Dashboard
-                </a>
-                {% else %}
-                    <a href="{% url 'user_dashboard' %}" class="bg-blue-300 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300">
+                <a href="{% url 'dashboard' %}" class="bg-blue-300 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300">
                     Go to My Dashboard
-                    </a>
-                {% endif %}
+                </a>
             {% else %}
-            <a href="{% url 'login' %}" class="bg-blue-300 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300">
-                Get Started
-            </a>
+                <a href="{% url 'login' %}" class="bg-blue-300 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300">
+                    Get Started
+                </a>
             {% endif %}
         </main>
+
 
         <!-- Footer -->
         <footer class="bg-gray-900 bg-opacity-80 text-white text-center py-4">

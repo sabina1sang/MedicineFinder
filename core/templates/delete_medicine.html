@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Medicine</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+
+<!-- Header -->
+<header class="bg-red-500 text-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center p-4">
+        <h1 class="text-xl font-bold">🗑 Delete Medicine</h1>
+        <nav class="flex space-x-4">
+            <a href="{% url 'home' %}" class="hover:underline">Home</a>
+            <a href="{% url 'inv' %}" class="hover:underline">Manage Medicines</a>
+            <a href="{% url 'logout' %}" class="hover:underline">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Confirmation -->
+<div class="container mx-auto mt-6 p-6 bg-white rounded shadow max-w-lg text-center">
+    <p class="mb-6 text-lg">Are you sure you want to delete <strong>{{ medicine.medicine.name }}</strong>?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow">
+            Yes, Delete
+        </button>
+        <a href="{% url 'inv' %}" class="ml-4 text-gray-600 hover:underline">Cancel</a>
+    </form>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-900 bg-opacity-80 text-white text-center py-4 fixed bottom-0 left-0 w-full">
+    <p>&copy; 2025 Medicine Finder | All rights reserved.</p>
+</footer>
+
+</body>
+</html>
