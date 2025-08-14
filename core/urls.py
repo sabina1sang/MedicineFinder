@@ -18,5 +18,6 @@ urlpatterns = [
     path('about/', views.about_view, name='about'),
     path('contact/', views.contact_view, name='contact'),
      path('map/', views.map_view, name='map'),
+    path('pharmacy/update-location/', views.update_pharmacy_location, name='update_pharmacy_location'),
     path('api/pharmacies/', views.PharmacyListAPI.as_view(), name='pharmacy_list_api'),
 ]

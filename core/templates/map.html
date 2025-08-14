@@ -13,28 +13,40 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Default view — Nepal center
+    // Create map (default center in Nepal just in case there’s no data)
     const map = L.map('map').setView([28.3949, 84.1240], 7);
 
-    // Add OSM layer
+    // Add OSM tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
     // Fetch pharmacies from API
-    fetch("{% url 'pharmacy_list_api' %}")  // Django URL to your API
+    fetch("{% url 'pharmacy_list_api' %}")
         .then(response => response.json())
         .then(data => {
+            const markers = [];
+
             data.forEach(pharmacy => {
                 if (pharmacy.latitude && pharmacy.longitude) {
-                    const marker = L.marker([pharmacy.latitude, pharmacy.longitude]).addTo(map);
+                    const lat = parseFloat(pharmacy.latitude);
+                    const lng = parseFloat(pharmacy.longitude);
+
+                    const marker = L.marker([lat, lng]).addTo(map);
                     marker.bindPopup(`
                         <strong>${pharmacy.name}</strong><br>
                         ${pharmacy.address || ''}<br>
                         📞 ${pharmacy.phone || 'N/A'}
                     `);
+
+                    markers.push([lat, lng]);
                 }
             });
+
+            // If we have any markers, fit the map view to show them all
+            if (markers.length > 0) {
+                map.fitBounds(markers);
+            }
         })
         .catch(error => console.error('Error fetching pharmacies:', error));
 });
