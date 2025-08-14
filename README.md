@@ -99,4 +99,6 @@ Interactive mapping
 API development
 
 Clean UI/UX with Tailwind
+
+
 📬 Let's Connect Feel free to reach out via GitHub or LinkedIn if you'd like to discuss this project or explore how I can contribute to your team.
