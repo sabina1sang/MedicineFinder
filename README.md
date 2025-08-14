@@ -80,7 +80,7 @@ medfinder/
 
 Clone this repo:
 
-git clone https://github.com/YOUR_USERNAME/medfinder.git
+git clone https://github.com/sabina1sang/MedicineFinder.git
 cd medfinder
 
 
